@@ -73,10 +73,31 @@ namespace CrystalReportDemo
                     con.Open();
 
                     string query = @"
-                        SELECT  BatchName, BatchStartTime, BatchEndTime, RecipeName, 
-                            OperationName, OperationId, OperationStartTime, OperationEndTime, DateTime, Temp_SetMin, Temp_SetMax, Hum_SetMin, Hum_SetMax, 
-                            Pres_SetMin, Pres_SetMax, Speed_SetMin, Speed_SetMax, Temperature, Humidity, Pressure, MachineSpeed 
-                            FROM ParameterLogTable;";
+                       SELECT 
+    MAX(BatchName) AS BatchName,
+    MAX(BatchStartTime) AS BatchStartTime,
+    MAX(BatchEndTime) AS BatchEndTime,
+    MAX(RecipeName) AS RecipeName,
+    MAX(OperationName) AS OperationName,
+    MAX(OperationId) AS OperationId,
+    MAX(Iteration) AS Iteration,
+    MAX(OperationStartTime) AS OperationStartTime,
+    MAX(OperationEndTime) AS OperationEndTime,
+    DateTime,
+    MAX(Temp_SetMin) AS Temp_SetMin,
+    MAX(Temp_SetMax) AS Temp_SetMax,
+    MAX(Hum_SetMin) AS Hum_SetMin,
+    MAX(Hum_SetMax) AS Hum_SetMax,
+    MAX(Pres_SetMin) AS Pres_SetMin,
+    MAX(Pres_SetMax) AS Pres_SetMax,
+    MAX(Speed_SetMin) AS Speed_SetMin,
+    MAX(Speed_SetMax) AS Speed_SetMax,
+    MAX(Temperature) AS Temperature,
+    MAX(Humidity) AS Humidity,
+    MAX(Pressure) AS Pressure,
+    MAX(MachineSpeed) AS MachineSpeed
+FROM ParameterLogTable
+GROUP BY DateTime  ORDER BY OperationId, DateTime ASC;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
