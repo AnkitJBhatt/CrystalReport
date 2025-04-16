@@ -73,11 +73,13 @@ namespace CrystalReportDemo
                     con.Open();
 
                     string query = @"
-                       SELECT 
+                      SELECT 
     MAX(BatchName) AS BatchName,
     MAX(BatchStartTime) AS BatchStartTime,
     MAX(BatchEndTime) AS BatchEndTime,
     MAX(RecipeName) AS RecipeName,
+	MAX(RecipeStartTime) AS RecipeStartTime,
+    MAX(RecipeEndTime) AS RecipeEndTime,
     MAX(OperationName) AS OperationName,
     MAX(OperationId) AS OperationId,
     MAX(Iteration) AS Iteration,
