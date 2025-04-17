@@ -66,6 +66,7 @@ namespace CrystalReportDemo
 	MAX(RecipeStartTime) AS RecipeStartTime,
     MAX(RecipeEndTime) AS RecipeEndTime,
     MAX(OperationName) AS OperationName,
+    MAX(OperationSequence) AS OperationSequence,
     MAX(OperationId) AS OperationId,
     MAX(Iteration) AS Iteration,
     MAX(OperationStartTime) AS OperationStartTime,
@@ -84,7 +85,7 @@ namespace CrystalReportDemo
     MAX(Pressure) AS Pressure,
     MAX(MachineSpeed) AS MachineSpeed
 FROM ParameterLogTable
-GROUP BY DateTime  ORDER BY OperationId, DateTime ASC;";
+GROUP BY DateTime  ORDER BY DateTime ,OperationSequence ASC;";
 
                     using (SqlCommand cmd = new SqlCommand(query, con))
                     using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
